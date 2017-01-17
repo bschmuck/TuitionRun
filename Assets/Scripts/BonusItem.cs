@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class BonusItem : MonoBehaviour {
 
+	AudioSource source;
+
 	// Use this for initialization
 	void Start () {
+		source = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -13,8 +16,13 @@ public class BonusItem : MonoBehaviour {
 		transform.Rotate(0, 0, 1);
 	}
 
-//	void OnCollisionEnter(Collision collision) {
-//		GetComponent<AudioSource> ().Play ();
-//		Destroy (gameObject);
-//	}
+	void OnTriggerEnter(Collider hit) {
+//		print (collision.gameObject.tag);
+//		if (collision.gameObject.tag == "MAX") {
+			
+			source.Play ();
+			print ("Collected!");
+			Destroy (gameObject);
+//		}
+	}
 }
