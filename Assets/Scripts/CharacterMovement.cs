@@ -33,6 +33,7 @@ public class CharacterMovement : MonoBehaviour {
 		if (controller.isGrounded) {
 			Gravity = 0;
 		}
+		controller.Move (transform.up * Time.deltaTime * .06f);
 		controller.Move (moveDirection * Time.deltaTime);
 	}
 }
