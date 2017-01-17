@@ -12,6 +12,9 @@ public class CharacterMovement : MonoBehaviour {
 	public float JumpSpeed = 8.0f;
 	public float Speed = 6.0f;
 
+	float xHighBound = -45;
+	float xLowBound = -48;
+
 	// Use this for initialization
 	void Start () {
 		moveDirection = transform.forward;
@@ -24,16 +27,21 @@ public class CharacterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey (KeyCode.LeftArrow)) {
-			transform.Translate(-Vector3.right * Speed * Time.deltaTime);
-		} else if (Input.GetKey (KeyCode.RightArrow)) {
-			transform.Translate(Vector3.right * Speed * Time.deltaTime);
+		float xPos = controller.gameObject.transform.position.x;
+		controller.Move (moveDirection * Time.deltaTime);
+		print (xPos);
+
+		if (Input.GetKey (KeyCode.LeftArrow) && xPos > xLowBound) {
+			transform.Translate (-Vector3.right * Speed * Time.deltaTime);
+		} else if (Input.GetKey (KeyCode.RightArrow) && xPos < xHighBound) {
+			transform.Translate (Vector3.right * Speed * Time.deltaTime);
 		}
 		Gravity -= 9.81f * Time.deltaTime * 0.01f;
 		if (controller.isGrounded) {
 			Gravity = 0;
 		}
 		controller.Move (transform.up * Time.deltaTime * .06f);
-		controller.Move (moveDirection * Time.deltaTime);
+		xHighBound -= Time.deltaTime * 0.025f;
+		xLowBound -= Time.deltaTime * 0.025f;
 	}
 }
