@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour {
 
 	private Vector3 moveDirection = Vector3.zero;
-	public float gravity = 20f;
+	public float Gravity = 0;
 	private CharacterController controller;
 	private Animator anim;
 
@@ -29,7 +29,10 @@ public class CharacterMovement : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.RightArrow)) {
 			transform.Translate(Vector3.right * Speed * Time.deltaTime);
 		}
-
+		Gravity -= 9.81f * Time.deltaTime;
+		if (controller.isGrounded) {
+			Gravity = 0;
+		}
 		controller.Move (moveDirection * Time.deltaTime);
 	}
 }
