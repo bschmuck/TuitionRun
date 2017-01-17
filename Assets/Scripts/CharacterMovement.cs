@@ -19,7 +19,7 @@ public class CharacterMovement : MonoBehaviour {
 		moveDirection *= Speed;
 		controller = GetComponent<CharacterController> ();
 		anim = GetComponentInChildren<Animator> ();
-		anim.SetBool ("started", true);
+		anim.SetBool (Constants.AnimationStarted, true);
 	}
 	
 	// Update is called once per frame
