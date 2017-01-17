@@ -13,8 +13,8 @@ public class BonusItem : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter(Collision collision) {
-		GetComponent<AudioSource> ().Play ();
-		Destroy (gameObject);
-	}
+//	void OnCollisionEnter(Collision collision) {
+//		GetComponent<AudioSource> ().Play ();
+//		Destroy (gameObject);
+//	}
 }
