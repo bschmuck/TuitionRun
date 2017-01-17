@@ -29,7 +29,7 @@ public class CharacterMovement : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.RightArrow)) {
 			transform.Translate(Vector3.right * Speed * Time.deltaTime);
 		}
-		Gravity -= 9.81f * Time.deltaTime;
+		Gravity -= 9.81f * Time.deltaTime * 0.01f;
 		if (controller.isGrounded) {
 			Gravity = 0;
 		}
