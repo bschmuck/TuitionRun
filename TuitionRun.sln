@@ -1,7 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{4EB87EF5-546E-2605-91FA-2BC7F6C1D433}") = "TuitionRun", "Assembly-CSharp.csproj", "{9C878C53-82F3-3152-798F-A4BA81672DFD}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TuitionRun", "TuitionRun.csproj", "{8D16ECFC-E7BB-CC89-6971-23DB8EB7E59B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9C878C53-82F3-3152-798F-A4BA81672DFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C878C53-82F3-3152-798F-A4BA81672DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C878C53-82F3-3152-798F-A4BA81672DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C878C53-82F3-3152-798F-A4BA81672DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D16ECFC-E7BB-CC89-6971-23DB8EB7E59B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D16ECFC-E7BB-CC89-6971-23DB8EB7E59B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D16ECFC-E7BB-CC89-6971-23DB8EB7E59B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D16ECFC-E7BB-CC89-6971-23DB8EB7E59B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

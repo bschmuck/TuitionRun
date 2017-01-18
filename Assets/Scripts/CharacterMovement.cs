@@ -121,7 +121,7 @@ public class CharacterMovement : MonoBehaviour {
 //		}
 //
 		controller.Move (transform.up * Time.deltaTime * .06f * multiplier/1.45f);
-		xHighBound -= Time.deltaTime * 0.025f * multiplier/.7f;
-		xLowBound -= Time.deltaTime * 0.025f * multiplier/.7f;
+	//	xHighBound -= Time.deltaTime * 0.025f * multiplier/.7f;
+	//	xLowBound -= Time.deltaTime * 0.025f * multiplier/.7f;
 	}
 }
