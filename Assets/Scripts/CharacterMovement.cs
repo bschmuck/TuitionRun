@@ -99,7 +99,7 @@ public class CharacterMovement : MonoBehaviour {
 			print (xPos);
 			controller.Move (moveDirection * Time.deltaTime * multiplier);
 
-			if (Input.GetKey (KeyCode.UpArrow) && !isJumping) {
+			if ((Input.GetKey (KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) && !isJumping) {
 				moveDirection.y = JumpSpeed / multiplier;
 				isJumping = true;
 				anim.SetBool (Constants.AnimationJump, true);
@@ -117,9 +117,9 @@ public class CharacterMovement : MonoBehaviour {
 				anim.SetBool (Constants.AnimationJump, false);
 			}
 				
-			if (Input.GetKey (KeyCode.LeftArrow) && xPos > xLowBound) {
+			if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && xPos > xLowBound) {
 				transform.Translate (-Vector3.right * Speed * Time.deltaTime);
-			} else if (Input.GetKey (KeyCode.RightArrow) && xPos < xHighBound) {
+			} else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && xPos < xHighBound) {
 				transform.Translate (Vector3.right * Speed * Time.deltaTime);
 			}
 		}

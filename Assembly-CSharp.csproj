@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\ObjectsSpawner.cs" />
      <Compile Include="Assets\Scripts\Obstacle.cs" />
      <Compile Include="Assets\Scripts\PathSpawnCollider.cs" />
+     <Compile Include="Assets\Scripts\RestartGame.cs" />
      <Compile Include="Assets\Scripts\ScoreManager.cs" />
      <Compile Include="Assets\Scripts\TimeDestroyer.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
