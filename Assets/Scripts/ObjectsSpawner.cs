@@ -9,6 +9,8 @@ public class ObjectsSpawner : MonoBehaviour {
 	public GameObject[] Obstacles;
 	public GameObject Hunt;
 	public Transform HuntSpawn;
+	public Transform SkySpawn;
+	public GameObject Sky;
 
 	bool placeHunt = true;
 	static bool isInitial = true;
@@ -35,6 +37,9 @@ public class ObjectsSpawner : MonoBehaviour {
 			}
 			if (placeHunt && Random.Range (0, 2) == 0) {
 				Instantiate (Hunt, HuntSpawn.position, Quaternion.identity);
+			}
+			if (Random.Range (0, 3) == 0) {
+				Instantiate (Sky, SkySpawn.position, Quaternion.identity);
 			}
 		} else {
 			isInitial = false;
