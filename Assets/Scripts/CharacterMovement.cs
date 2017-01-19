@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour {
 
 	float PlayerY;
 
-	float xHighBound = -45;
+	float xHighBound = -44.5f;
 	float xLowBound = -48;
 
 	float bonusTime = 0;
@@ -120,7 +120,7 @@ public class CharacterMovement : MonoBehaviour {
 //			moveDirection.y -= Gravity * Time.deltaTime;
 //		}
 //
-		controller.Move (transform.up * Time.deltaTime * .06f * multiplier/1.45f);
+//		controller.Move (transform.up * Time.deltaTime * .06f * multiplier/1.45f);
 	//	xHighBound -= Time.deltaTime * 0.025f * multiplier/.7f;
 	//	xLowBound -= Time.deltaTime * 0.025f * multiplier/.7f;
 	}
