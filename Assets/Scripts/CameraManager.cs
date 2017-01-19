@@ -7,6 +7,8 @@ public class CameraManager : MonoBehaviour {
 	public bool didUpdate = false;
 	float secondsElapsed = 0;
 
+	Quaternion originalRotation;
+
 	void Awake() {
 		if (instance == null) {
 			instance = this;
@@ -31,6 +33,7 @@ public class CameraManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		originalRotation = transform.rotation;
 		
 	}
 	
@@ -41,6 +44,7 @@ public class CameraManager : MonoBehaviour {
 				secondsElapsed += Time.deltaTime;
 				transform.RotateAround (transform.position, transform.up, 1.5f);
 			} else {
+				transform.rotation = originalRotation;
 				didUpdate = true;
 			}
 		}
