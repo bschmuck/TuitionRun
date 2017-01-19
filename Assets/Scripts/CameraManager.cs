@@ -40,7 +40,7 @@ public class CameraManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!didUpdate) {
-			if (secondsElapsed <= 4.5) {
+			if (secondsElapsed <= 4.5 && !Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.W)) {
 				secondsElapsed += Time.deltaTime;
 				transform.RotateAround (transform.position, transform.up, 1.5f);
 			} else {

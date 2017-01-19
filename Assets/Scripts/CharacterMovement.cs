@@ -25,8 +25,11 @@ public class CharacterMovement : MonoBehaviour {
 	float bonusTime = 0;
 
 	float Counter = 0;
+	float movingCounter = 0;
 
-	float minY = 0;
+	bool isMovingRight = false;
+	bool isMovingLeft = false;
+
 
 	void Awake() {
 		if (instance == null) {
@@ -54,7 +57,6 @@ public class CharacterMovement : MonoBehaviour {
 		moveDirection = transform.TransformDirection (moveDirection);
 		moveDirection *= Speed;
 		controller = GetComponent<CharacterController> ();
-		minY = controller.transform.position.y;
 	}
 
 	public void SpeedBoost() {
@@ -118,10 +120,25 @@ public class CharacterMovement : MonoBehaviour {
 			}
 				
 			if ((Input.GetKey (KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && xPos > xLowBound) {
-				transform.Translate (-Vector3.right * Speed * Time.deltaTime);
+//				transform.Translate (-Vector3.right * Speed * Time.deltaTime);
+				isMovingLeft = true;
 			} else if ((Input.GetKey (KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && xPos < xHighBound) {
-				transform.Translate (Vector3.right * Speed * Time.deltaTime);
+//				transform.Translate (Vector3.right * Speed * Time.deltaTime);
+				isMovingRight = true;
 			}
+				
+			if (isMovingLeft && movingCounter < 10 && xPos > xLowBound) {
+				transform.Translate (-Vector3.right * Speed * Time.deltaTime);
+				movingCounter++;
+			} else if (isMovingRight && movingCounter < 10 && xPos < xHighBound) {
+				transform.Translate (Vector3.right * Speed * Time.deltaTime);
+				movingCounter++;
+			} else if(movingCounter != 0) {
+				movingCounter = 0;
+				isMovingLeft = false;
+				isMovingRight = false;
+			}
+
 		}
 	}
 }
