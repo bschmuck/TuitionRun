@@ -12,6 +12,9 @@ public class CharacterMovement : MonoBehaviour {
 	public float JumpSpeed = 20.0f;
 	public float Speed = 6.0f;
 
+	bool isJumping = false;
+	int jumpCounter = 0;
+
 	float time;
 
 	float PlayerY;
@@ -92,16 +95,34 @@ public class CharacterMovement : MonoBehaviour {
 		}
 			
 		float xPos = controller.gameObject.transform.position.x;
-		controller.Move (moveDirection * Time.deltaTime * multiplier);
 		print (xPos);
+		controller.Move (moveDirection * Time.deltaTime * multiplier);
 
-//		if (Input.GetKey (KeyCode.UpArrow)) {
-//			moveDirection.y = JumpSpeed;
+		if (Input.GetKey (KeyCode.UpArrow) && !isJumping) {
+			moveDirection.y = JumpSpeed/multiplier;
+			isJumping = true;
+			anim.SetBool(Constants.AnimationJump, true);
+		} else if (controller.transform.position.y > 0.811 && isJumping) {
+			jumpCounter++;
+			if (jumpCounter == 30) {
+				moveDirection.y = -Gravity/multiplier;
+				jumpCounter = 0;
+			}
+			anim.SetBool(Constants.AnimationJump, false);
+		} else {
+			isJumping = false;
+			moveDirection.y = 0;
+			controller.transform.position = new Vector3(controller.transform.position.x,0.811f,controller.transform.position.z);
+//			controller.transform.position.y = 0.811;
+			anim.SetBool(Constants.AnimationJump, false);
+		}
 //		} else if (controller,Transform.p > 0) {
 //			moveDirection.y = -Gravity;
 //		} else {
 //			moveDirection.y = 0;
 //		}
+
+		
 
 		if (Input.GetKey (KeyCode.LeftArrow) && xPos > xLowBound) {
 			transform.Translate (-Vector3.right * Speed * Time.deltaTime);
@@ -113,6 +134,8 @@ public class CharacterMovement : MonoBehaviour {
 //		if (moveDirection.y - Gravity * Time.deltaTime >= PlayerY) {
 //			
 //		}
+
+		print ("Dir: " + controller.transform.position.y);
 
 //		print ("Min Y: " + minY);
 //		print ("moveDirection: " + (moveDirection.y - Gravity * Time.deltaTime));
