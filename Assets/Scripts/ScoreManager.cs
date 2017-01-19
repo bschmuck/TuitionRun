@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour {
 
-	public Text ScoreText;
-	private float Score = 0;
+	public float Score = 0;
 
 	void Awake() {
 		if (instance == null) {
@@ -15,6 +14,7 @@ public class ScoreManager : MonoBehaviour {
 		else {
 			DestroyImmediate(this);
 		}
+		DontDestroyOnLoad(transform.gameObject);
 	}
 
 	//singleton implementation
@@ -30,15 +30,13 @@ public class ScoreManager : MonoBehaviour {
 
 	public void ResetScore() {
 		Score = 0;
-		UpdateScoreLabel ();
+		UIManager.Instance.UpdateScoreLabel (Score);
 	}
 
 	public void IncreaseScore(float value) {
 		Score += value;
-		UpdateScoreLabel ();
+		UIManager.Instance.UpdateScoreLabel (Score);
 	}
 
-	private void UpdateScoreLabel() {
-		ScoreText.text = "Raised for Tuiton $" + Score;
-	}
+
 }

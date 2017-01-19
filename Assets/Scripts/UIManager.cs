@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
 	public Text PowerupText;
+	public Text ScoreText;
 
 	void Awake() {
 		if (instance == null) {
@@ -43,5 +44,9 @@ public class UIManager : MonoBehaviour {
 
 	public void HidePowerUp() {
 		PowerupText.enabled = false;
+	}
+
+	public void UpdateScoreLabel(float Score) {
+		ScoreText.text = "Raised for Tuiton $" + Score;
 	}
 }
