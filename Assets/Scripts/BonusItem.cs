@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BonusItem : MonoBehaviour {
 
-	AudioSource source;
+	public AudioClip saw;
 
 	// Use this for initialization
 	void Start () {
-		source = GetComponent<AudioSource> ();
+		GetComponent<AudioSource> ().clip = saw;
 	}
 	
 	// Update is called once per frame
@@ -20,11 +20,11 @@ public class BonusItem : MonoBehaviour {
 	void OnTriggerEnter(Collider collision) {
 		print (collision.gameObject.tag);
 		if (collision.gameObject.tag == "Player") {
+			AudioSource.PlayClipAtPoint(GetComponent<AudioSource> ().clip, transform.position);
 			if (gameObject.tag == "Natty") {
 				CharacterMovement.Instance.SpeedBoost ();
 			}
 			ScoreManager.Instance.IncreaseScore(100f);
-			source.Play ();
 			print ("Collected!");
 			Destroy (gameObject);
 		}
