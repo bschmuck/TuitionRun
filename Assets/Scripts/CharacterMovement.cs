@@ -54,8 +54,6 @@ public class CharacterMovement : MonoBehaviour {
 		moveDirection = transform.TransformDirection (moveDirection);
 		moveDirection *= Speed;
 		controller = GetComponent<CharacterController> ();
-		anim = GetComponentInChildren<Animator> ();
-		anim.SetBool (Constants.AnimationStarted, true);
 		minY = controller.transform.position.y;
 	}
 
@@ -67,84 +65,63 @@ public class CharacterMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		float multiplier = 1.0f;
-		if (bonusTime > 0) {
-			multiplier = 3f;
-			bonusTime -= Time.deltaTime;
-			Counter++;
-			if (Counter < 20) {
-				UIManager.Instance.ShowPowerUp ();
-			} else if (Counter < 40) {
-				UIManager.Instance.HidePowerUp ();
+		if (CameraManager.Instance.didUpdate) {
+			anim = GetComponentInChildren<Animator> ();
+			anim.SetBool (Constants.AnimationStarted, true);
+			float multiplier = 1.0f;
+			if (bonusTime > 0) {
+				multiplier = 3f;
+				bonusTime -= Time.deltaTime;
+				Counter++;
+				if (Counter < 20) {
+					UIManager.Instance.ShowPowerUp ();
+				} else if (Counter < 40) {
+					UIManager.Instance.HidePowerUp ();
+				} else {
+					Counter = 0;
+				}
 			} else {
 				Counter = 0;
+				UIManager.Instance.HidePowerUp ();
 			}
-		} else {
-			Counter = 0;
-			UIManager.Instance.HidePowerUp ();
-		}
 
-		time += Time.deltaTime;
-		float scoreAdder = 1f;
-		if (time >= .1) {
-			if (multiplier > 1) {
-				scoreAdder = multiplier * 3;
+			time += Time.deltaTime;
+			float scoreAdder = 1f;
+			if (time >= .1) {
+				if (multiplier > 1) {
+					scoreAdder = multiplier * 3;
+				}
+				ScoreManager.Instance.IncreaseScore (scoreAdder);
+				time = 0;
 			}
-			ScoreManager.Instance.IncreaseScore(scoreAdder);
-			time = 0;
-		}
-			
-		float xPos = controller.gameObject.transform.position.x;
-		print (xPos);
-		controller.Move (moveDirection * Time.deltaTime * multiplier);
+				
+			float xPos = controller.gameObject.transform.position.x;
+			print (xPos);
+			controller.Move (moveDirection * Time.deltaTime * multiplier);
 
-		if (Input.GetKey (KeyCode.UpArrow) && !isJumping) {
-			moveDirection.y = JumpSpeed/multiplier;
-			isJumping = true;
-			anim.SetBool(Constants.AnimationJump, true);
-		} else if (controller.transform.position.y > 0.811 && isJumping) {
-			jumpCounter++;
-			if (jumpCounter == 30) {
-				moveDirection.y = -Gravity/multiplier;
-				jumpCounter = 0;
+			if (Input.GetKey (KeyCode.UpArrow) && !isJumping) {
+				moveDirection.y = JumpSpeed / multiplier;
+				isJumping = true;
+				anim.SetBool (Constants.AnimationJump, true);
+			} else if (controller.transform.position.y > 0.811 && isJumping) {
+				jumpCounter++;
+				if (jumpCounter == 30) {
+					moveDirection.y = -Gravity / multiplier;
+					jumpCounter = 0;
+				}
+				anim.SetBool (Constants.AnimationJump, false);
+			} else {
+				isJumping = false;
+				moveDirection.y = 0;
+				controller.transform.position = new Vector3 (controller.transform.position.x, 0.811f, controller.transform.position.z);
+				anim.SetBool (Constants.AnimationJump, false);
 			}
-			anim.SetBool(Constants.AnimationJump, false);
-		} else {
-			isJumping = false;
-			moveDirection.y = 0;
-			controller.transform.position = new Vector3(controller.transform.position.x,0.811f,controller.transform.position.z);
-//			controller.transform.position.y = 0.811;
-			anim.SetBool(Constants.AnimationJump, false);
+				
+			if (Input.GetKey (KeyCode.LeftArrow) && xPos > xLowBound) {
+				transform.Translate (-Vector3.right * Speed * Time.deltaTime);
+			} else if (Input.GetKey (KeyCode.RightArrow) && xPos < xHighBound) {
+				transform.Translate (Vector3.right * Speed * Time.deltaTime);
+			}
 		}
-//		} else if (controller,Transform.p > 0) {
-//			moveDirection.y = -Gravity;
-//		} else {
-//			moveDirection.y = 0;
-//		}
-
-		
-
-		if (Input.GetKey (KeyCode.LeftArrow) && xPos > xLowBound) {
-			transform.Translate (-Vector3.right * Speed * Time.deltaTime);
-		} else if (Input.GetKey (KeyCode.RightArrow) && xPos < xHighBound) {
-			transform.Translate (Vector3.right * Speed * Time.deltaTime);
-		}
-
-//		PlayerY += Time.deltaTime * .06f * multiplier / 1.45f;
-//		if (moveDirection.y - Gravity * Time.deltaTime >= PlayerY) {
-//			
-//		}
-
-		print ("Dir: " + controller.transform.position.y);
-
-//		print ("Min Y: " + minY);
-//		print ("moveDirection: " + (moveDirection.y - Gravity * Time.deltaTime));
-//		if (minY - (moveDirection.y - Gravity * Time.deltaTime) > -1.5) {
-//			moveDirection.y -= Gravity * Time.deltaTime;
-//		}
-//
-//		controller.Move (transform.up * Time.deltaTime * .06f * multiplier/1.45f);
-	//	xHighBound -= Time.deltaTime * 0.025f * multiplier/.7f;
-	//	xLowBound -= Time.deltaTime * 0.025f * multiplier/.7f;
 	}
 }

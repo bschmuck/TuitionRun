@@ -4,8 +4,30 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-	bool didUpdate = true;
+	public bool didUpdate = false;
 	float secondsElapsed = 0;
+
+	void Awake() {
+		if (instance == null) {
+			instance = this;
+		}
+		else {
+			DestroyImmediate(this);
+		}
+		DontDestroyOnLoad(transform.gameObject);
+	}
+
+	//singleton implementation
+	private static CameraManager instance;
+	public static CameraManager Instance {
+		get {
+			if (instance == null) {
+				instance = new CameraManager ();
+			}
+			return instance;
+		}
+	}
+
 
 	// Use this for initialization
 	void Start () {
@@ -14,10 +36,13 @@ public class CameraManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!didUpdate && secondsElapsed >= 3) {
-			transform.RotateAround (transform.position, transform.up, 180f);
-			didUpdate = true;
+		if (!didUpdate) {
+			if (secondsElapsed <= 4.5) {
+				secondsElapsed += Time.deltaTime;
+				transform.RotateAround (transform.position, transform.up, 1.5f);
+			} else {
+				didUpdate = true;
+			}
 		}
-		secondsElapsed += Time.deltaTime;
 	}
 }
