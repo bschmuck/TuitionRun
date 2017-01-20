@@ -107,7 +107,7 @@ public class CharacterMovement : MonoBehaviour {
 				anim.SetBool (Constants.AnimationJump, true);
 			} else if (controller.transform.position.y > 0.811 && isJumping) {
 				jumpCounter++;
-				if (jumpCounter == 30) {
+				if (jumpCounter == 40) {
 					moveDirection.y = -Gravity / multiplier;
 					jumpCounter = 0;
 				}

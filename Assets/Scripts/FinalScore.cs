@@ -29,7 +29,8 @@ public class FinalScore : MonoBehaviour {
         string[] temps;
         temps = new string[10];
 
-        FileStream F = new FileStream(fst, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        FileStream F = File.Open(fst, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
         foreach (string line in File.ReadAllLines(fst))
         {
             temper[inc] = float.Parse(line, CultureInfo.InvariantCulture.NumberFormat);
@@ -65,7 +66,7 @@ public class FinalScore : MonoBehaviour {
             temps[inc] = tempf.ToString();
         }
         File.WriteAllLines(fst, temps);
-
+        F.Close();
     }
     // Update is called once per frame
     void Update () {
