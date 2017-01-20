@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\FinalScore.cs" />
      <Compile Include="Assets\Scripts\GameStart.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
+     <Compile Include="Assets\Scripts\MonsterRunner.cs" />
      <Compile Include="Assets\Scripts\ObjectsSpawner.cs" />
      <Compile Include="Assets\Scripts\Obstacle.cs" />
      <Compile Include="Assets\Scripts\PathSpawnCollider.cs" />

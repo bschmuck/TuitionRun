@@ -14,21 +14,24 @@ public class ObjectsSpawner : MonoBehaviour {
 
 	bool placeHunt = true;
 	static bool isInitial = true;
+	static int landCounter = 0;
 
 	// Use this for initialization
 	void Start () {
-		if (!isInitial) {
+		if (landCounter > 0) {
 			for (int i = 0; i < SpawnPoints.Length; i++) {
-				bool placeItem = Random.Range (0, 6) == 0;
+				bool placeNatty = Random.Range (0, 15) == 0;
 				bool placeObstacle = false;
-				if (placeItem) {
-					int bonusIndex = Random.Range (0, Bonus.Length);
-					CreateObject (SpawnPoints [i].position, Bonus [bonusIndex], bonusIndex == 1);
+				if (placeNatty) {
+//					int bonusIndex = Random.Range (0, Bonus.Length);
+					CreateObject (SpawnPoints [i].position, Bonus [0], false);
 				} else {
 					placeObstacle = Random.Range (0, 10) == 0;
 					if (placeObstacle) {
 						int objIndex = Random.Range (0, Obstacles.Length);
 						Instantiate (Obstacles [objIndex], SpawnPoints [i].position + new Vector3 (0, -0.5f, 0), Quaternion.identity);
+					} else {
+						CreateObject (SpawnPoints [i].position, Bonus [1], true);
 					}
 				}
 				if (placeObstacle && i >= 2) {
@@ -42,7 +45,7 @@ public class ObjectsSpawner : MonoBehaviour {
 				Instantiate (Sky, SkySpawn.position, Quaternion.identity);
 			}
 		} else {
-			isInitial = false;
+			landCounter++;
 		}
 	}
 
