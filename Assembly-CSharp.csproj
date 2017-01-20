@@ -49,6 +49,7 @@
      <Compile Include="Assets\FDS_MonsterDog\Scripts\MouseOrbitAdvanced.cs" />
      <Compile Include="Assets\Scripts\BonusItem.cs" />
      <Compile Include="Assets\Scripts\CameraManager.cs" />
+     <Compile Include="Assets\Scripts\CameraRotation.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
      <Compile Include="Assets\Scripts\CharacterState.cs" />
      <Compile Include="Assets\Scripts\Constants.cs" />
