@@ -12,7 +12,7 @@ public class FinalScore : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		float score = ScoreManager.Instance.Score;
-        Update_Highscores(fstr, score);
+//        Update_Highscores(fstr, score);
 		if (score < 52732) {
 			ScoreLabel.text = "You only paid $" + score + ". Subra is sad. :-(";
 		} else {
